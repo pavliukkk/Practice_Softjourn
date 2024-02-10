@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('.form-register__container form');
 
     forms.forEach(form => {
-        const emailInput = form.querySelector('input[name="email"]');
+        const emailInput = form.querySelector('input[name="username"]');
         const passwordInput = form.querySelector('input[name="password"]');
         const errorMessages = form.querySelectorAll('.error-msg');
 

@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault(); // Заборонити відправку форми для відлагодження
 
     let currentTime = new Date().toLocaleTimeString('en-US', { hour12: false });
-    const firstName = reservationForm.querySelector('input[name="first_name"]').value;
-    const lastName = reservationForm.querySelector('input[name="last_name"]').value;
+    const firstName = reservationForm.querySelector('input[name="name"]').value;
+    const lastName = reservationForm.querySelector('input[name="surname"]').value;
     const email = reservationForm.querySelector('input[name="email"]').value;
     const phone = reservationForm.querySelector('input[name="phone"]').value;
     const date = dateInput.value;
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const errorMessage = document.getElementById("error");
 
-    if (!firstName || !lastName || !email || !phone || !date || !time || !currentPage.includes('contact.html')) {
+    if (!firstName || !lastName || !email || !phone || !date || !time || !currentPage.includes('contact')) {
       errorMessage.style.display = "block";
     } else {
       setTimeout(function () {
