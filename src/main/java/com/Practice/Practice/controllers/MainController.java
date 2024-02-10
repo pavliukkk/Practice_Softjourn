@@ -24,37 +24,73 @@ public class MainController {
             model.addAttribute("user", user);
         }
 
-        return "index.html";
+        return "index";
     }
 
     @GetMapping("/FoodZero")
-    public String customHomepage(Model model) {
-        model.addAttribute("title", "FoodZero");
-        return "index.html";
+    public String customHomepage(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            User user = userRepository.findByEmail(email);
+
+            model.addAttribute("user", user);
+        }
+        return "index";
     }
 
     @GetMapping("/about")
-    public String about(Model model) {
-        model.addAttribute("title", "About us");
-        return "about.html";
+    public String about(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            User user = userRepository.findByEmail(email);
+
+            model.addAttribute("user", user);
+        }
+        return "about";
     }
 
     @GetMapping("/portfolio")
-    public String portfolio(Model model) {
-        model.addAttribute("title", "Portfolio");
+    public String portfolio(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            User user = userRepository.findByEmail(email);
+
+            model.addAttribute("user", user);
+        }
         return "portfolio";
     }
 
     @GetMapping("/soon")
-    public String soon(Model model) {
-        model.addAttribute("title", "Soon");
-        return "soon.html";
+    public String soon(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            User user = userRepository.findByEmail(email);
+
+            model.addAttribute("user", user);
+        }
+        return "soon";
     }
 
     @GetMapping("/menu")
-    public String menu(Model model) {
-        model.addAttribute("title", "Menu");
-        return "menu.html";
+    public String menu(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            User user = userRepository.findByEmail(email);
+
+            model.addAttribute("user", user);
+        }
+        return "menu";
+    }
+
+    @GetMapping("/contact")
+    public String contactPage(Model model, Principal principal) {
+        if (principal != null) {
+            String email = principal.getName();
+            User user = userRepository.findByEmail(email);
+
+            model.addAttribute("user", user);
+        }
+        return "contact";
     }
 
 }

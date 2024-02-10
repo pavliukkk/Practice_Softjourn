@@ -8,10 +8,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private AuthenticationFailureHandler authenticationFailureHandler;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -32,19 +37,25 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomAuthenticationFailureHandler();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests((authorize) -> authorize
-                        .requestMatchers("/", "/login", "/registration").permitAll()
                         .anyRequest().permitAll()
                 )
-                .formLogin((formLogin) -> formLogin
+                .formLogin(formLogin -> formLogin
                         .loginPage("/login")
-                        .loginProcessingUrl("/signin")
                         .defaultSuccessUrl("/")
+                        .failureHandler(authenticationFailureHandler)
                         .permitAll()
                 )
                 .logout((logout) -> logout
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll()

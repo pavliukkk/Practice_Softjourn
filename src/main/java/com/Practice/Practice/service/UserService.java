@@ -10,4 +10,6 @@ public interface UserService {
 
     public boolean checkEmail(String email);
 
+    boolean existsByPhone(String phone);
+
 }
