@@ -77,7 +77,12 @@
                         <li><a href="blogs" class="nav__list-link">Blogs</a></li>
                         <li><a href="about" class="nav__list-link">About</a></li>
                         <li><a href="contact" class="nav__list-link">Contact</a></li>
-                        <li class="hide"><a href="login" class="nav__btn subtitle-big">Log In</a></li>
+                        <li class="hide">
+                           <a th:if="${user}" href="/logout" class="nav__btn subtitle-big">[[${user.name}]] [[${user.surname}]]</a>
+                        </li>
+                        <li class="hide">
+                           <a th:unless="${user}" href="/login" class="nav__btn subtitle-big">Log In</a>
+                        </li>
                      </ul>
                      <div class="nav__info">
                         <div class="nav__info-title subtitle-big">Contact</div>
@@ -97,7 +102,8 @@
                   </div>
                   <div class="nav__contact">
                      <a href="tel:+86 852 346 000" class="nav__link">+86 852 346 000</a>
-                     <a href="login.html" class="nav__btn subtitle-big">Log In</a>
+                     <a th:if="${user}" href="/logout" class="nav__btn subtitle-big">[[${user.name}]] [[${user.surname}]]</a>
+                     <a th:unless="${user}" href="/login" class="nav__btn subtitle-big">Log In</a>
                   </div>
                </div>
             </div>
@@ -234,14 +240,14 @@
                <div class="reservation">
                   <div class="title-big">Make a Reservation</div>
                   <div class="text">Get in touch with restaurant</div>
-                  <form action="#" method="post">
+                  <form action="mainReservation" id="reservationForm" method="post">
                      <div class="reservation__form-inputs">
                         <input type="date" class="reservation__form-input text" onfocus="(this.type='date')"
-                           name="date">
+                               name="date">
                         <input type="time" class="reservation__form-input text" name="time">
                         <div class="dropdown">
                            <input class="reservation__form-input reservation__form-input-text text" type="text"
-                              name="people" value="1 Person" readonly="readonly">
+                                  name="people" value="1 Person" readonly="readonly">
                            <ul class="dropdown-options visually-hidden">
                               <li class="dropdown-options__item dropdown-options__item--active" data-option="1 Person">1
                                  Person</li>

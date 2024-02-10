@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
    <meta charset='UTF-8'>
@@ -96,7 +96,7 @@
                   </div>
                   <div class="nav__contact">
                      <a href="tel:+86 852 346 000" class="nav__link">+86 852 346 000</a>
-                     <a href="registration" class="nav__btn subtitle-big">Sign Up</a>
+                     <a href="/registration" class="nav__btn subtitle-big">Sign Up</a>
                   </div>
                </div>
          </nav>
@@ -114,16 +114,23 @@
                            <div class="title-big">Sign in to your account</div>
                            <div class="text">Welcome! Enter your details and get in touch with restaurant</div>
                         </div>
-                        <form action="#" class="register_form" id="loginForm">
+                        <form action="login" class="register_form" id="loginForm" method="post">
                            <div class="login__form-inputs">
-                              <input class="reservation__form-input text" type="text" name="email"
-                                 placeholder="Email or Phone Number">
+                              <input class="reservation__form-input text" type="text" name="username"
+                                 placeholder="Email or Phone Number" >
                               <input class="reservation__form-input text" type="password" name="password"
                                  placeholder="Password">
                            </div>
                            <div class="errors">
                               <p class="error-msg message" id="no_login">Please enter your login</p>
-                              <p class="error-msg message" id="no_user">Please enter your password</p>
+                              <p class="error-msg message" id="no_password">Please enter your password</p>
+                              <p class="error-msg message" id="no_user" th:if="${param.error} and ${session.noUserError}" style="display: block;">
+                                 This user does not seem to exist
+                              </p>
+                              <p class="error-msg message" id="wrong_password" th:if="${param.error} and ${session.wrongPasswordError}" style="display: block;">
+                                 Wrong login or password
+                              </p>
+
                            </div>
                            <button class="reservation__form-btn subtitle-big" type="submit">Sign In</button>
                         </form>
@@ -141,7 +148,7 @@
    <footer>
       <div class="container">
          <div class="footer">
-            <a href="index.html" class="footer__logo title">Food
+            <a href="/" class="footer__logo title">Food
                Zero.</a>
             <div class="footer__contact">
                <div class="footer__title subtitle-big">Contact</div>

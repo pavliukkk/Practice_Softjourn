@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
    <meta charset='UTF-8'>
@@ -19,6 +19,7 @@
    <meta property='og:image' content='img/favicon/apple-touch-icon.webp' />
    <link rel="stylesheet" href="css/normalize/normalize.css">
    <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/swiper-bundle.min.css">
    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
@@ -76,13 +77,11 @@
                         <li><a href="blogs" class="nav__list-link">Blogs</a></li>
                         <li><a href="about" class="nav__list-link">About</a></li>
                         <li><a href="contact" class="nav__list-link">Contact</a></li>
-                        <li th:if="${#authorization.expression('isAuthenticated()')}">
-                           <!-- If authenticated, show user's name and surname -->
-                           <span th:text="${#authentication.principal.surname + ' ' + #authentication.principal.name}"></span>
+                        <li class="hide">
+                        <a th:if="${user}" href="/logout" class="nav__btn subtitle-big">[[${user.name}]] [[${user.surname}]]</a>
                         </li>
-                        <li th:unless="${#authorization.expression('isAuthenticated()')}" class="hide">
-                           <!-- If not authenticated, show the login link -->
-                           <a href="login" class="nav__btn subtitle-big">Log In</a>
+                        <li class="hide">
+                        <a th:unless="${user}" href="/login" class="nav__btn subtitle-big">Log In</a>
                         </li>
                      </ul>
                      <div class="nav__info">
@@ -104,7 +103,8 @@
                   </div>
                   <div class="nav__contact">
                      <a href="tel:+86852346000" class="nav__link">+86 852 346 000</a>
-                     <a href="login" class="nav__btn subtitle-big">Log In</a>
+                     <a th:if="${user}" href="/logout" class="nav__btn subtitle-big">[[${user.name}]] [[${user.surname}]]</a>
+                     <a th:unless="${user}" href="/login" class="nav__btn subtitle-big">Log In</a>
                   </div>
                </div>
             </div>
@@ -254,7 +254,7 @@
                <div class="reservation">
                   <div class="title-big">Make a Reservation</div>
                   <div class="text">Get in touch with restaurant</div>
-                  <form action="#" id="reservationForm">
+                  <form action="mainReservation" id="reservationForm" method="post">
                      <div class="reservation__form-inputs">
                         <input type="date" class="reservation__form-input text" onfocus="(this.type='date')"
                            name="date">
@@ -376,7 +376,7 @@
                </div>
                <div class="footer__item">
                   <div class="footer__title subtitle-big">Never Miss a Recipe</div>
-                  <form action="#" class="footer__form">
+                  <form action="subscribe" class="footer__form" method="post">
                      <input type="email" name="email" class="footer__form-input footer__subtitle text"
                         placeholder="Email Address" required>
                      <button class="footer__form-btn footer__title subtitle-big" type="submit">Subscribe</button>
@@ -411,15 +411,22 @@
                <div class="title-big">Sign in to your account</div>
                <div class="text">Welcome! Enter your details and get in touch with restaurant</div>
             </div>
-            <form action="#" class="register_form" id="loginForm">
+            <form action="login" class="register_form" id="loginForm" method="post">
                <div class="login__form-inputs">
-                  <input class="reservation__form-input text" type="text" name="email"
-                     placeholder="Email or Phone Number">
-                  <input class="reservation__form-input text" type="password" name="password" placeholder="Password">
+                  <input class="reservation__form-input text" type="text" name="username"
+                         placeholder="Email or Phone Number">
+                  <input class="reservation__form-input text" type="password" name="password"
+                         placeholder="Password">
                </div>
                <div class="errors">
                   <p class="error-msg message" id="no_login">Please enter your login</p>
-                  <p class="error-msg message" id="no_password">Please enter a password</p>
+                  <p class="error-msg message" id="no_password">Please enter your password</p>
+                  <p class="error-msg message" id="no_user" th:if="${noUserError}" style="display: block;">
+                     This user does not seem to exist
+                  </p>
+                  <p class="error-msg message" id="wrong_password" th:if="${wrongPasswordError}" style="display: block;">
+                     Wrong login or password
+                  </p>
                </div>
                <button class="reservation__form-btn subtitle-big" type="submit">Sign In</button>
             </form>
@@ -434,8 +441,8 @@
    <script src="js/main.min.js"></script>
    <script src="js/dropdown.js"></script>
    <script src="js/getLocation.js"></script>
-   <script src="js/loginModal.js"></script>
-   <script src="js/reservationModal.js"></script>
+   <script th:if="${user}==null" src="js/loginModal.js"></script>
+   <script th:if="${user}!=null" src="js/reservationModal.js"></script>
    <script src="js/reservation_form_check.js"></script>
    <script src="js/login_correct.js"></script>
    <script src="js/json_output.js"></script>
