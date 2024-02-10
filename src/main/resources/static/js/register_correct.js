@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const weakPasswordError = document.getElementById('weak_password');
     const fillError = document.getElementById('fill_error');
     const signUpForm = document.querySelector('.register_form');
-    const phoneNumberField = document.querySelector('input[name="phone_number"]');
+    const phoneNumberField = document.querySelector('input[name="phone"]');
 
     differentPasswordsError.style.display = 'none';
     shortPasswordsError.style.display = 'none';
