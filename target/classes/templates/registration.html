@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
    <meta charset='UTF-8'>
@@ -96,7 +96,7 @@
                   </div>
                   <div class="nav__contact">
                      <a href="tel:+86 852 346 000" class="nav__link">+86 852 346 000</a>
-                     <a href="login.html" class="nav__btn subtitle-big">Log In</a>
+                     <a href="/login" class="nav__btn subtitle-big">Log In</a>
                   </div>
                </div>
          </nav>
@@ -113,20 +113,24 @@
                         <div class="reg_text">
                            <div class="title-big">Create Account</div>
                            <div class="text">Welcome! Enter your details and get in touch with restaurant</div>
-                           <div class="text">Already have an account? <a href="login.html">Click here to log
+                           <div class="text">Already have an account? <a href="/login">Click here to log
                                  in</a></div>
                         </div>
-                        <form action="/registration" method="post" class="register_form">
+                        <form action="registration" method="post" class="register_form">
                            <div class="register__form-inputs">
                               <input class="reservation__form-input text" type="text" name="surname" placeholder="Surname">
                               <input class="reservation__form-input text" type="text" name="name" placeholder="Name">
                               <input class="reservation__form-input text" type="email" name="email" placeholder="Email Address">
                               <input class="reservation__form-input text" type="text" name="phone" placeholder="Phone Number">
                               <input class="reservation__form-input text" type="password" name="password" placeholder="Password">
-                              <input class="reservation__form-input text" type="password" name="confirm_password" placeholder="Confirm Password">
+                              <input class="reservation__form-input text"  type="password" name="confirm_password" placeholder="Confirm Password">
                            </div>
                            <div class="errors">
-                              <p class="error-msg message" id="user_exist" th:if="${userExistError}">
+                              <p class="error-msg message" id="different_passwords">Passwords do not match</p>
+                              <p class="error-msg message" id="short_passwords">Passwords are too small</p>
+                              <p class="error-msg message" id="weak_password">Password must contain a letter</p>
+                              <p class="error-msg message" id="fill_error">Please fill in all fields</p>
+                              <p class="error-msg message" th:if="${errorUserExist}" id="user_exist" style="display: block;">
                                  User with this email or phone number already exists
                               </p>
                            </div>

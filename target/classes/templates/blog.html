@@ -78,7 +78,12 @@
                         <li><a href="blogs" class="nav__list-link">Blogs</a></li>
                         <li><a href="about" class="nav__list-link">About</a></li>
                         <li><a href="contact" class="nav__list-link">Contact</a></li>
-                        <li class="hide"><a href="login" class="nav__btn subtitle-big">Log In</a></li>
+                        <li class="hide">
+                           <a th:if="${user}" href="/logout" class="nav__btn subtitle-big">[[${user.name}]] [[${user.surname}]]</a>
+                        </li>
+                        <li class="hide">
+                           <a th:unless="${user}" href="/login" class="nav__btn subtitle-big">Log In</a>
+                        </li>
                      </ul>
                      <div class="nav__info">
                         <div class="nav__info-title subtitle-big">Contact</div>
@@ -98,7 +103,8 @@
                   </div>
                   <div class="nav__contact">
                      <a href="tel:+86 852 346 000" class="nav__link">+86 852 346 000</a>
-                     <a href="login.html" class="nav__btn subtitle-big">Log In</a>
+                     <a th:if="${user}" href="/logout" class="nav__btn subtitle-big">[[${user.name}]] [[${user.surname}]]</a>
+                     <a th:unless="${user}" href="/login" class="nav__btn subtitle-big">Log In</a>
                   </div>
                </div>
             </div>
@@ -121,7 +127,7 @@
             <div class="container">
                <div class="fashion">
                   <div class="fashion__item">
-                     <a href="blog-post.html">
+                     <a href="blog-post">
                         <div class="fashion__item-img">
                            <div class="fashion__item-label">Fashion</div>
                         </div>
@@ -141,12 +147,12 @@
                         </h4>
                         <p class="fashion__item-text">Nature's Defense: How Fruits and Vegetables Shield Against
                            Diseases.
-                        </p> <a href="blog-post.html" class="fashion__item-link text">Read More <img
+                        </p> <a href="blog-post" class="fashion__item-link text">Read More <img
                               src="img/arrow-right.svg" alt="arrow-right"></a>
                      </a>
                   </div>
                   <div class="fashion__item">
-                     <a href="blog-post.html">
+                     <a href="blog-post">
                         <div class="fashion__item-img">
                            <div class="fashion__item-label">Fashion</div>
                         </div>
@@ -165,12 +171,12 @@
                         <h4 class="fashion__item-title subtitle">Asparagus Spring Salad with Rocket, Goat's Cheese</h4>
                         <p class="fashion__item-text">Asparagus Delight: Spring Salad Infused with Rocket and Goat's
                            Cheese. </p>
-                        <a href="blog-post.html" class="fashion__item-link text">Read More <img
+                        <a href="blog-post" class="fashion__item-link text">Read More <img
                               src="img/arrow-right.svg" alt="arrow-right"></a>
                      </a>
                   </div>
                   <div class="fashion__item">
-                     <a href="blog-post.html">
+                     <a href="blog-post">
                         <div class="fashion__item-img">
                            <div class="fashion__item-label">Fashion</div>
                         </div>
@@ -191,12 +197,12 @@
                         <h4 class="fashion__item-title subtitle">The Best Style of Dough for Dumplings</h4>
                         <p class="fashion__item-text">Discovering the perfect dough for dumplings involves a delicate
                            balance of textures. </p>
-                        <a href="blog-post.html" class="fashion__item-link text">Read More <img
+                        <a href="blog-post" class="fashion__item-link text">Read More <img
                               src="img/arrow-right.svg" alt="arrow-right"></a>
                      </a>
                   </div>
                   <div class="fashion__item">
-                     <a href="blog-post.html">
+                     <a href="blog-post">
                         <div class="fashion__item-img">
                            <div class="fashion__item-label">Fashion</div>
                         </div>
@@ -217,12 +223,12 @@
                         <h4 class="fashion__item-title subtitle">7 Reasons to Start Your Day With Lemon Water</h4>
                         <p class="fashion__item-text">Starting your day with a glass of lemon water isn't just a trend
                            it's a holistic health choice. </p>
-                        <a href="blog-post.html" class="fashion__item-link text">Read More <img
+                        <a href="blog-post" class="fashion__item-link text">Read More <img
                               src="img/arrow-right.svg" alt="arrow-right"></a>
                      </a>
                   </div>
                   <div class="fashion__item">
-                     <a href="blog-post.html">
+                     <a href="blog-post">
                         <div class="fashion__item-img">
                            <div class="fashion__item-label">Fashion</div>
                         </div>
@@ -243,12 +249,12 @@
                         <h4 class="fashion__item-title subtitle">Three Ideas for Cooking Goat Meat at Home</h4>
                         <p class="fashion__item-text">Cooking goat meat at home opens doors to a world of diverse
                            culinary experiences. </p>
-                        <a href="blog-post.html" class="fashion__item-link text">Read More <img
+                        <a href="blog-post" class="fashion__item-link text">Read More <img
                               src="img/arrow-right.svg" alt="arrow-right"></a>
                      </a>
                   </div>
                   <div class="fashion__item">
-                     <a href="blog-post.html">
+                     <a href="blog-post">
                         <div class="fashion__item-img">
                            <div class="fashion__item-label">Fashion</div>
                         </div>
@@ -269,7 +275,7 @@
                         <h4 class="fashion__item-title subtitle">12 Sparkling Wines We're Loving This Summer</h4>
                         <p class="fashion__item-text">Amidst the summer heat, savoring a glass of sparkling wine adds
                            effervescence to any occasion. </p>
-                        <a href="blog-post.html" class="fashion__item-link text">Read More <img
+                        <a href="blog-post" class="fashion__item-link text">Read More <img
                               src="img/arrow-right.svg" alt="arrow-right"></a>
                      </a>
                   </div>
